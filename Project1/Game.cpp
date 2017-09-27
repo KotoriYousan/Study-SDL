@@ -18,6 +18,7 @@ Game::~Game()
 {
 
 }
+
 bool Game::init(const char* title, int xpos, int ypos, int width, int height, int flags)
 {
 	if (SDL_Init(SDL_INIT_EVERYTHING) == 0)  //SDL_Init成功。参数也可写为SDL_INIT_VIDEO | SDL_INIT_TIMER  
@@ -52,7 +53,6 @@ bool Game::init(const char* title, int xpos, int ypos, int width, int height, in
 	}
 
 
-	//m_textureManager.load("assets/animate.png", "animate", m_pRenderer);
 	if (!TheTextureManager::Instance()->load("assets/animate.png", "animate", m_pRenderer))
 		return false;
 	//load()方法是bool值，可以在这里加入判断，失败直接返回  
@@ -106,7 +106,7 @@ void Game::update()
 
 void Game::handleEvents()
 {
-	SDL_Event event;    //这个变量放这里合适否？每次循环都会生成这个局部变量  
+/*	SDL_Event event;    //这个变量放这里合适否？每次循环都会生成这个局部变量  
 	if (SDL_PollEvent(&event))
 	{
 		switch (event.type)
@@ -118,14 +118,21 @@ void Game::handleEvents()
 		default:
 			break;
 		}
-	}   //事件处理在第4章详细介绍  
+	}   //事件处理在第4章详细介绍  */
+	TheInputHandler::Instance()->update();
 }
 
 void Game::clean()
 {
 	std::cout << "cleaning game\n";
+	//TheInputHandler::Instance()->clean();//目前为止还用不上。如果需要对手柄进行处理，则需要
 	SDL_DestroyWindow(m_pWindow);   //销毁资源，可以加上判断  
 	//if(m_pWindow) { SDL_DestroyWindow(m_pWindow); }  
 	SDL_DestroyRenderer(m_pRenderer);
 	SDL_Quit();
+}
+
+void Game::quit()
+{
+	m_bRunning = false;
 }

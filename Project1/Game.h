@@ -6,6 +6,7 @@
 #include "GameObject.h"
 #include "Player.h"
 #include "Enemy.h"
+#include "InputHandler.h"
 
 #include <vector>
 
@@ -20,6 +21,7 @@ public:
 	void handleEvents();
 	void clean();
 	bool running() { return m_bRunning; }   //返回运行状态  
+	void quit();
 
 	//由于渲染器指针会被外部使用，因此定义一个get方法  
 	SDL_Renderer* getRenderer() const { return m_pRenderer; }
