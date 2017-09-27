@@ -29,6 +29,7 @@ public:
 
 	void clean();
 
+
 	bool getMouseButtonState(int buttonNumber)
 	{
 		return m_mouseButtonStates[buttonNumber];
@@ -48,6 +49,23 @@ private:
 	std::vector <bool> m_mouseButtonStates; //鼠标状态数组，0左，1中，2右
 
 	Vector2D* m_mousePosition;
+
+
+
+	// private functions to handle different event types
+	// handle keyboard events
+	void onKeyDown();
+	void onKeyUp();
+	// handle mouse events
+	void onMouseMove(SDL_Event& event);
+	void onMouseButtonDown(SDL_Event& event);
+	void onMouseButtonUp(SDL_Event& event);
+	/*	// handle joysticks events
+	void onJoystickAxisMove(SDL_Event& event);
+	void onJoystickButtonDown(SDL_Event& event);
+	void onJoystickButtonUp(SDL_Event& event);*/
+
+
 };
 
 typedef InputHandler TheInputHandler;
