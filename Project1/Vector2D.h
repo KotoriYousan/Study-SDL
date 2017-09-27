@@ -1,3 +1,6 @@
+#ifndef _VECTOR_2D_
+#define _VECTOR_2D_
+
 #include <math.h>
 
 class Vector2D
@@ -77,3 +80,5 @@ private:
 	float m_x;
 	float m_y;
 };
+
+#endif //_VECTOR_2D_
