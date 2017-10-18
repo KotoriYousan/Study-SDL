@@ -7,6 +7,9 @@
 #include "Player.h"
 #include "Enemy.h"
 #include "InputHandler.h"
+#include "GameStateMachine.h"
+#include "MenuState.h"
+#include "PlayState.h"
 
 #include <vector>
 
@@ -32,7 +35,7 @@ public:
 	//GameObject* m_player;
 	//GameObject* m_enemy;
 
-
+	GameStateMachine* m_pGameStateMachine;
 
 	static Game* Instance()
 	{

@@ -63,6 +63,10 @@ bool Game::init(const char* title, int xpos, int ypos, int width, int height, in
 		"animate")));
 
 
+	m_pGameStateMachine = new GameStateMachine();
+	m_pGameStateMachine->changeState(new MenuState());
+
+
 	std::cout << "init success\n";
 	m_bRunning = true;  //所有初始都成功，可以开始主循环了  
 	return true;
@@ -106,20 +110,11 @@ void Game::update()
 
 void Game::handleEvents()
 {
-/*	SDL_Event event;    //这个变量放这里合适否？每次循环都会生成这个局部变量  
-	if (SDL_PollEvent(&event))
-	{
-		switch (event.type)
-		{
-		case SDL_QUIT:
-			m_bRunning = false; //结束循环  
-			break;
-
-		default:
-			break;
-		}
-	}   //事件处理在第4章详细介绍  */
 	TheInputHandler::Instance()->update();
+	if (TheInputHandler::Instance()->isKeyDown(SDL_SCANCODE_RETURN))
+	{
+		m_pGameStateMachine->changeState(new PlayState());
+	}
 }
 
 void Game::clean()
